@@ -1,4 +1,3 @@
-import { PROPERTY_TYPES } from "@babel/types";
 import React from "react";
 
 const Scroll = (props) => {
