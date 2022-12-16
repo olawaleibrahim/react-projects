@@ -16,7 +16,7 @@ function App() {
         fetch("https://jsonplaceholder.typicode.com/users").then(
             response => response.json()).then(
                 users => setRobots(users))
-    }, [count]);
+    }, [count]); // use count
 
     const onSearchChange = (event) => {
         setSearchfield(event.target.value);
