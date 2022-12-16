@@ -5,8 +5,11 @@ import "./App.css";
 import Scroll from "../components/Scroll";
 import ErrorBoundary from "../components/ErrorBoundary";
 
-function App() {
+import { setSearchField } from "../actions";
 
+function App(store) {
+
+    console.log("store", store.store.getState());
     const [robots, setRobots] = useState([]);
     const [searchfield, setSearchfield] = useState("");
     const [count, setCount] = useState(0);
