@@ -6,28 +6,17 @@ import Scroll from "../components/Scroll";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 function App() {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         robots: [],
-    //         searchfield: ""
-    //     }
-    // }
 
     const [robots, setRobots] = useState([]);
     const [searchfield, setSearchfield] = useState("");
-
-    // componentDidMount() {
-    //     fetch("https://jsonplaceholder.typicode.com/users").then(
-    //         response => response.json()).then(
-    //             users => this.setState({ robots: users }))
-    // }
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
+        console.log(count);
         fetch("https://jsonplaceholder.typicode.com/users").then(
             response => response.json()).then(
                 users => setRobots(users))
-    }, []);
+    }, [count]); // only run if count changes
 
     const onSearchChange = (event) => {
         setSearchfield(event.target.value);
@@ -42,6 +31,7 @@ function App() {
         return (
             <div className="tc">
                 <h1 className="f2">RoboFriends</h1>
+                <button onClick={() => setCount(count + 1)}>Click Me!</button>
                 <SearchBox searchChange={onSearchChange} />
                 <Scroll>
                     <ErrorBoundary>
@@ -52,6 +42,5 @@ function App() {
         );
     }
 }
-
 
 export default App;
