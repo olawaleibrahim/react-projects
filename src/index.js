@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { configureStore } from "@reduxjs/toolkit";
-import { searchRobots, requestRobots, combine } from './reducers';
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { searchRobots, requestRobots } from './reducers';
 import './index.css';
 import App from './containers/App';
 import 'tachyons';
 
-const store = configureStore({ reducer: searchRobots });
+const rootReducer = combineReducers({
+  searchRobots, requestRobots
+});
+const store = configureStore({ reducer: rootReducer });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

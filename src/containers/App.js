@@ -6,17 +6,21 @@ import "./App.css";
 import Scroll from "../components/Scroll";
 import ErrorBoundary from "../components/ErrorBoundary";
 
-import { setSearchField } from "../actions";
+import { setSearchField, requestRobots } from "../actions";
 
 const mapStateToProps = (state) => {
     return {
-        searchField: state.searchField
+        searchField: state.searchRobots.searchField,
+        robots: state.requestRobots.robots,
+        isPending: state.requestRobots.isPending,
+        error: state.requestRobots.error
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSearchChange: (event_) => dispatch(setSearchField(event_.target.value))
+        onSearchChange: (event_) => dispatch(setSearchField(event_.target.value)),
+        onRequestRobots: () => dispatch(requestRobots())
     }
 }
 
@@ -24,6 +28,7 @@ function App(store) {
 
     const [robots, setRobots] = useState([]);
     const [searchfield, setSearchfield] = useState("");
+    const [isPending, setIsPending] = useState("");
     const [count, setCount] = useState(0);
 
     useEffect(() => {
@@ -40,7 +45,7 @@ function App(store) {
     const filteredRobots = robots.filter(robot => {
         return robot.name.toLowerCase().includes(searchfield.toLowerCase());
     });
-    if (!robots.length) {
+    if (isPending) {
         return <h1>Loading</h1>
     } else {
         return (
