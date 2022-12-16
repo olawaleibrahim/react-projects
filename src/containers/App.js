@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch) => {
 
 function App(store) {
 
-    console.log("store", store);
     const [robots, setRobots] = useState([]);
     const [searchfield, setSearchfield] = useState("");
     const [count, setCount] = useState(0);
