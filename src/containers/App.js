@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import "./App.css";
@@ -7,9 +8,21 @@ import ErrorBoundary from "../components/ErrorBoundary";
 
 import { setSearchField } from "../actions";
 
+const mapStateToProps = (state) => {
+    return {
+        searchField: state.searchField
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSearchChange: (event_) => dispatch(setSearchField(event_.target.value))
+    }
+}
+
 function App(store) {
 
-    console.log("store", store.store.getState());
+    console.log("store", store);
     const [robots, setRobots] = useState([]);
     const [searchfield, setSearchfield] = useState("");
     const [count, setCount] = useState(0);
@@ -44,6 +57,6 @@ function App(store) {
             </div>
         );
     }
-}
+};
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
